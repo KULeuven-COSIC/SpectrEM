@@ -42,7 +42,7 @@ More information on how to reproduce our results can be found [here](./scripts/r
 ## How to cite this work
 
 ```
-@inproceedings{demeulemeester2022spectrem,
+@inproceedings{demeulemeester2023spectrem,
   author    = {De Meulemeester, Jesse and Purnal, Antoon and Wouters, Lennert and Beckers, Arthur and Verbauwhede, Ingrid},
   title     = {{SpectrEM}: Exploiting Electromagnetic Emanations During Transient Execution},
   booktitle = {USENIX Security Symposium},
