@@ -57,7 +57,7 @@ To measure the electromagnetic emanations resulting from the transient instructi
     All experiments are built around the Arm Cortex-A72. Remove the integrated heat spreader to allow the EM probe close access to the IC.
   * EM probe  
     An EM probe with a sufficiently high spatial locality. For instance, the probes used in the paper are the [Langer HH500-6](https://www.langer-emv.de/en/product/near-field-microprobes-icr-hh-h-field/26/icr-hh500-6-near-field-microprobe-2-mhz-to-6-ghz/108) (setup A) and the [Langer RF-R 0.3-3](https://www.langer-emv.de/en/product/rf-passive-30-mhz-up-to-3-ghz/35/rf-r-0-3-3-h-field-probe-mini-30-mhz-up-to-3-ghz/18) (setup B). Set up your EM probe to measure the normal EM field (i.e., the field perpendicular to the IC surface) and place it near the optimal position for a specific core (e.g., core 1), as indicated in Figure 4. Please note that different probes may result in different observed results.
-  * Amplifiers
+  * Amplifiers  
     If required, add amplifiers between the scope and the probe to boost the measured signal. In our setups, we used either a 20 dB (setup A) or a 50 dB (setup B) amplification.
   * Oscilloscope  
     An oscilloscope with a sufficiently high sampling rate and bandwidth. In our experiments, we used the Tektronix DPO70604C with an analog bandwidth of 6 GHz and a sampling rate of 25 GS/s.

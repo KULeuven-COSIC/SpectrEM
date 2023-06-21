@@ -37,7 +37,7 @@ To stop a running POC:
 
 ## Collecting traces  
 
-This section gives an overview of how to interface with the POC gadgets. For an example implementation, see [collect-traces.ipynb](../scripts/collect/collect-traces.ipynb).
+This section gives an overview of how to interface with the POC gadgets. For an example implementation, see [collect-traces.ipynb](../scripts/collect/collect_traces.ipynb).
 
 ### SpectrEM  
 A UDP interface exposes the gadgets in the POC implementations of the Spectre
