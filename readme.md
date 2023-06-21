@@ -1,6 +1,6 @@
 # SpectrEM: Exploiting Electromagnetic Emanations During Transient Execution
 
-This repository contains the proof-of-concept implementations and post-processing scripts for the paper *SpectrEM: Exploiting Electromagnetic Emanations During Transient Execution*.
+This repository contains the proof-of-concept implementations and post-processing scripts for the paper [*SpectrEM: Exploiting Electromagnetic Emanations During Transient Execution*](https://www.esat.kuleuven.be/cosic/publications/article-3656.pdf).
 
 ## Structure
 
