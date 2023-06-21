@@ -1,0 +1,8 @@
+jupyter
+tqdm
+ipywidgets
+matplotlib
+numpy
+scipy
+h5py
+scikit-learn

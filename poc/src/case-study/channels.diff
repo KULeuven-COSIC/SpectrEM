@@ -1,0 +1,61 @@
+172c172,175
+< 	u_int channels_alloc;
+---
+> 	// We align this variable with a 64-byte word boundary as this places it on a
+> 	// different cache line than the `channels` pointer. This is a prerequisite
+> 	// for exploiting the gadget in the function `get_channel_id`.
+> 	u_int channels_alloc __attribute__((aligned(64)));
+233a237,240
+> // Map to the GPIO base register
+> // Will be initialized in the sftp_server_main function
+> volatile uint32_t *gpio = (uint32_t *)MAP_FAILED;
+> 
+246a254,278
+> 
+> 	// Initialize GPIO for the trigger
+> 	int fd = open ("/dev/gpiomem", O_RDWR | O_SYNC);
+> 
+> 	if (fd < 0) {
+> 		fatal_fr(fd, "gpio");
+> 	}
+> 
+> 	gpio = (uint32_t *)mmap(NULL, 0x01800000, (PROT_READ | PROT_WRITE), MAP_SHARED, fd, 0);
+> 
+> 	if (gpio == MAP_FAILED) {
+> 		if (fd >= 0) {
+> 			close(fd);
+> 		}
+> 		fatal_fr(1, "gpiommap");
+> 	}
+> 
+> 	if (fd >= 0) {
+> 		close(fd);
+> 	}
+> 
+> 	// Set GPIO pin 16 to OUTPUT
+> 	// Destination GPIO register is computed as 16//10
+> 	// Shift is computed as (16%10)*3
+> 	gpio[1] = (gpio[1] & ~(7 << 18)) | (1 << 18);
+253a286,289
+> 	// Flush the variable containing the length of the array from the cache
+> 	asm volatile("DC CIVAC, %0" : : "r"(&(ssh->chanctxt->channels_alloc)));
+> 	asm volatile("DSB ISH");
+> 
+254a291,296
+> 		// Clear the GPIO pin to trigger the scope.
+> 		// This is placed right after the gadget rather than in front to avoid
+> 		// interfering with the gadget.
+> 		// This is only reached when providing an invalid channel ID
+> 		gpio[10] = 1 << 16;  // Clear GPIO pin 16
+> 
+3594c3636,3638
+< 		logit("Received window adjust for non-open channel %d.", id);
+---
+> 		// Log the value of the memory location that was accessed. This enables the
+> 		// validation of the predicted traces.
+> 		logit("id=%d ssh->chanctxt->channels[id]=%p", id, ssh->chanctxt->channels[id]);
+3596a3641,3644
+> 
+> 	// This is only reached when providing a valid channel id (i.e., during training)
+> 	// Reset the GPIO pin
+> 	gpio[7] = 1 << 16;  // Set GPIO pin 16

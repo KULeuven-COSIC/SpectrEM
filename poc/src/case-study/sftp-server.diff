@@ -1,0 +1,107 @@
+59a60,63
+> // Map to the GPIO base register
+> // Will be initialized in the sftp_server_main function
+> volatile uint32_t *gpio = (uint32_t *)MAP_FAILED;
+> 
+115a120
+> static void process_verify(uint32_t id);
+156a162
+>   { "verify", NULL, SSH2_FXP_VERIFY, process_verify, 0 },
+326c332
+< static Handle *handles = NULL;
+---
+> static Handle *handles __attribute__((aligned(64))) = NULL;
+387a394
+> 
+399a407
+> 
+513a522,527
+> 
+> 	// Clear the GPIO pin to trigger the scope
+> 	// This is placed right after the gadget rather than in front to avoid
+> 	// interfering with the gadget.
+> 	gpio[10] = 1 << 16;  // Clear GPIO pin 16
+> 
+610c624
+< 	debug("request %u: sent handle handle %d", id, handle);
+---
+> 	debug("request %u: sent handle %d", id, handle);
+806a821,823
+> 	// Flush the variable containing the number of handles from the cache
+> 	asm volatile("DC CIVAC, %0" : : "r"(&num_handles));
+> 	asm volatile("DSB ISH");
+813a831
+>   
+1372a1391,1430
+> process_verify(uint32_t id)
+> {
+> 	static u_char buf[4]; // Buffer to store the read value in
+> 	static size_t buflen = sizeof(int);
+> 	int r, handle, ret, val, status = SSH2_FX_FAILURE;
+> 
+> 	// Reading the handle without checking whether it is valid
+> 	u_char *handle_buf;
+> 	size_t hlen;
+> 
+> 	if ((r = sshbuf_get_string(iqueue, &handle_buf, &hlen)) != 0)
+> 		goto out;
+> 	if (hlen < 256)
+> 		handle = get_u32(handle_buf);
+> 	else
+> 		goto out;
+> 	free(handle_buf);
+> 
+> 	debug("request %u: verify \"%s\" (handle %d)",
+> 	    id, handle_to_name(handle), handle);
+> 
+> 	// Read in the value that is used in the gadget when providing the handle
+> 	// Note that this can be out-of-bounds for the `handles' array, since we
+> 	// are interested in verifying the validity of the predictions that were
+> 	// obtained through the EM covert channel from the gadget.
+> 	val = handles[handle].use;
+> 
+> 	memcpy(buf, &val, buflen);
+> 	ret = buflen;
+> 
+> 	send_data(id, buf, ret);
+> 
+> 	/* success */
+> 	status = SSH2_FX_OK;
+>  out:
+> 	if (status != SSH2_FX_OK)
+> 		send_status(id, status); 
+> }
+> 
+> static void
+1900a1959
+> 
+2033a2093,2117
+> 	// Initialize GPIO for the trigger
+> 	int fd = open ("/dev/gpiomem", O_RDWR | O_SYNC);
+> 
+> 	if (fd < 0) {
+> 		fatal_fr(fd, "gpio");
+> 	}
+> 
+> 	gpio = (uint32_t *)mmap(NULL, 0x01800000, (PROT_READ | PROT_WRITE), MAP_SHARED, fd, 0);
+> 
+> 	if (gpio == MAP_FAILED) {
+> 		if (fd >= 0) {
+> 			close(fd);
+> 		}
+> 		fatal_fr(1, "gpiommap");
+> 	}
+> 
+> 	if (fd >= 0) {
+> 		close(fd);
+> 	}
+> 
+> 	// Set GPIO pin 16 to OUTPUT
+> 	// Destination GPIO register is computed as 16//10
+> 	// Shift is computed as (16%10)*3
+> 	gpio[1] = (gpio[1] & ~(7 << 18)) | (1 << 18);
+> 
+2034a2119,2121
+> 		// Reset the GPIO pin
+> 		gpio[7] = 1 << 16;  // Set GPIO pin 16
+> 
