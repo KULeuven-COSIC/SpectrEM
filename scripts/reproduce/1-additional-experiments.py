@@ -38,28 +38,15 @@ for gadget_i, setup_i in product(range(2), range(2)):
 
     print()
 
-for gadget_i, setup_i in product(range(2), range(2)):
-    gadget = gadgets[gadget_i]
-    setup = setups[setup_i]
-
-    print(gadget_i, gadget)
-    print(setup_i, setup)
-
-for gadget_i, setup_i in product(range(2), range(2)):
-    for i in range(6):
-        results_nb_train[gadget_i, setup_i, i, 0] = 1000//(i+1)
-        results_nb_train[gadget_i, setup_i, i, 1] = 1000
-        results_nb_train[gadget_i, setup_i, i, 2] = 1000//(i**2+1)
-        results_nb_train[gadget_i, setup_i, i, 3] = 1000
 
 plt.figure(figsize=(15, 5), dpi=80)
 
 ax = plt.subplot(1, 2, 1)
-plt.semilogy(np.arange(6), results_nb_train[0, 0, :, 0] / results_nb_train[0, 0, :, 1], "r--", label="Setup A -- GMM")
-plt.semilogy(np.arange(6), results_nb_train[0, 0, :, 2] / results_nb_train[0, 0, :, 3], "r-", label="Setup A -- MLP")
+plt.semilogy(np.arange(6), results_nb_train[0, 0, :, 0] / results_nb_train[0, 0, :, 1], "b--", label="Setup A -- GMM")
+plt.semilogy(np.arange(6), results_nb_train[0, 0, :, 2] / results_nb_train[0, 0, :, 3], "b-", label="Setup A -- MLP")
 
-plt.semilogy(np.arange(6), results_nb_train[0, 1, :, 0] / results_nb_train[0, 1, :, 1], "b--", label="Setup B -- GMM")
-plt.semilogy(np.arange(6), results_nb_train[0, 1, :, 2] / results_nb_train[0, 1, :, 3], "b-", label="Setup B -- MLP")
+plt.semilogy(np.arange(6), results_nb_train[0, 1, :, 0] / results_nb_train[0, 1, :, 1], "y--", label="Setup B -- GMM")
+plt.semilogy(np.arange(6), results_nb_train[0, 1, :, 2] / results_nb_train[0, 1, :, 3], "y-", label="Setup B -- MLP")
 
 plt.xlim(0, 5)
 plt.ylim(5e-5, 1)
@@ -70,11 +57,11 @@ plt.xlabel("Number of training packets")
 plt.legend()
 
 ax = plt.subplot(1, 2, 2)
-plt.semilogy(np.arange(6), results_nb_train[1, 0, :, 0] / results_nb_train[1, 0, :, 1], "r--", label="Setup A -- GMM")
-plt.semilogy(np.arange(6), results_nb_train[1, 0, :, 2] / results_nb_train[1, 0, :, 3], "r-", label="Setup A -- MLP")
+plt.semilogy(np.arange(6), results_nb_train[1, 0, :, 0] / results_nb_train[1, 0, :, 1], "b--", label="Setup A -- GMM")
+plt.semilogy(np.arange(6), results_nb_train[1, 0, :, 2] / results_nb_train[1, 0, :, 3], "b-", label="Setup A -- MLP")
 
-plt.semilogy(np.arange(6), results_nb_train[1, 1, :, 0] / results_nb_train[1, 1, :, 1], "b--", label="Setup B -- GMM")
-plt.semilogy(np.arange(6), results_nb_train[1, 1, :, 2] / results_nb_train[1, 1, :, 3], "b-", label="Setup B -- MLP")
+plt.semilogy(np.arange(6), results_nb_train[1, 1, :, 0] / results_nb_train[1, 1, :, 1], "y--", label="Setup B -- GMM")
+plt.semilogy(np.arange(6), results_nb_train[1, 1, :, 2] / results_nb_train[1, 1, :, 3], "y-", label="Setup B -- MLP")
 
 
 
@@ -116,8 +103,8 @@ for i, nb_ins in enumerate(nb_inss):
 
 plt.figure(figsize=(15, 5), dpi=80)
 
-plt.semilogy(nb_inss, results_nb_ins[:, 0] / results_nb_ins[:, 1], "b--", label="Setup B -- GMM")
-plt.semilogy(nb_inss, results_nb_ins[:, 2] / results_nb_ins[:, 3], "b-", label="Setup B -- MLP")
+plt.semilogy(nb_inss, results_nb_ins[:, 0] / results_nb_ins[:, 1], "y--", label="Setup B -- GMM")
+plt.semilogy(nb_inss, results_nb_ins[:, 2] / results_nb_ins[:, 3], "y-", label="Setup B -- MLP")
 
 plt.xlim(0, 72)
 plt.ylim(1e-5, 1)

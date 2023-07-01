@@ -123,7 +123,7 @@ def evaluate_file(filename: str, mlp: str, get_bit, mlp_threshold: float=0.95, g
     f = f[ind_nol[:,None],ind]
 
     # Perform the actual clustering. 
-    gmm = GaussianMixture(n_components=2, covariance_type="full")
+    gmm = GaussianMixture(n_components=2, covariance_type="full", n_init=10, random_state=0)
     gmm_labels = gmm.fit_predict(f)
     b_gmm = b[ind_nol]
 

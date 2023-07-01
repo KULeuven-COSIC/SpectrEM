@@ -1,6 +1,8 @@
 import h5py
 import numpy as np
+import os
 import scipy as sp
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'   # Disable tensorflow logs
 import tensorflow as tf
 
 from scipy.fft import fft
@@ -197,7 +199,7 @@ def evaluate_file_dvfs(filename, mlp_dir, get_bit, mlp_threshold=0.95, gmm_proba
             continue
 
         # Perform the actual clustering
-        gmm = GaussianMixture(n_components=2, covariance_type="full")
+        gmm = GaussianMixture(n_components=2, covariance_type="full", n_init=10, random_state=0)
         gmm_labels = gmm.fit_predict(f)
 
         b = expected[freq][ind_nol]
@@ -272,7 +274,7 @@ def evaluate_range(traces, inputs, window, ind, start=0, stop=16384, step=None):
         if len(f) < 2:
             continue
                 
-        gmm = GaussianMixture(n_components=2, covariance_type="full")
+        gmm = GaussianMixture(n_components=2, covariance_type="full", random_state=0)
         gmm_labels = gmm.fit_predict(f)
         
         b_gmm = get_bit_sp(inputs[np.arange(sstart, sstop)[ind_nol]])
@@ -440,7 +442,7 @@ def evaluate_file_noflush(filename: str, mlp: str, get_bit, mlp_threshold: float
     f = f[ind_nol[:,None],ind]
 
     # Perform the actual clustering. 
-    gmm = GaussianMixture(n_components=2, covariance_type="full")
+    gmm = GaussianMixture(n_components=2, covariance_type="full", n_init=10, random_state=0)
     gmm_labels = gmm.fit_predict(f)
     b_gmm = b[ind_nol]
 
@@ -492,7 +494,7 @@ results_gmm_noflush, results_mlp_noflush = evaluate_batch(
     f"{PRERECORDED_TRACES_DIR}/2-reducing-assumptions/2-flushing", 
     f"{PRERECORDED_TRACES_DIR}/2-reducing-assumptions/pretrained-mlp-models/2-flushing/spectrem_cf_a_pretrained_model.hdf5", 
     get_bit_sp,
-    "SFTP gadget",
+    "Cache thrashing",
     gmm_proba=True,
     eval_file=evaluate_file_noflush)
 
