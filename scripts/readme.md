@@ -2,7 +2,15 @@
 
 This directory contains all scripts to extract an encoded bit from an EM side-channel trace. 
 
-## System requirements
+## Getting started
+
+To get started, first [obtain some side-channel traces](../traces/readme.md) to evaluate (either by downloading the pre-recoded traces or by collecting your own traces).
+
+## Reproducing paper results
+
+We provide Python scripts to reproduce the results in our paper. Note that these scripts assume the working directory is the root directory of this repository.
+
+### Resource usage
 
 The following table summarizes the approximate resource usage for each script.
 
@@ -13,13 +21,6 @@ Script                        | Description                                     
 `2-reducing-assumptions.py`   | Reducing evaluation assumptions                     | Section 7              |  12 GB   |   58 GB   | 120 min. |
 `3-case-study.py`             | OpenSSH case study                                  | Section 8              | 2.8 GB   |    6 GB   |   2 min. | 
 
-## Getting started
-
-To get started, first [obtain some side-channel traces](../traces/readme.md) to evaluate (either by downloading the pre-recoded traces or by collecting your own traces).
-
-## Reproducing paper results
-
-We provide Python scripts to reproduce the results in our paper. Note that these scripts assume the working directory is the root directory of this repository.
 
 ### Troubleshooting
 
