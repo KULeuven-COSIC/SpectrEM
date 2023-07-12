@@ -2,6 +2,17 @@
 
 This directory contains all scripts to extract an encoded bit from an EM side-channel trace. 
 
+## System requirements
+
+The following table summarizes the approximate resource usage for each script.
+
+Script                        | Description                                         | Section                | Memory   |   Disk    | Run Time |
+------------------------------|-----------------------------------------------------|------------------------|:--------:|:---------:|:--------:|
+`0-base-experiments.py`       | SpectrEM and MeltEMdown evaluation                  | Table 1 & Section 6.2  | 4.2 GB   |   92 GB   |  20 min. |
+`1-additional-experiments.py` | Number of training packets and `udiv` instructions  | Figure 5 & Figure 7    | 4.5 GB   |  110 GB   |  20 min. |
+`2-reducing-assumptions.py`   | Reducing evaluation assumptions                     | Section 7              |  12 GB   |   58 GB   | 120 min. |
+`3-case-study.py`             | OpenSSH case study                                  | Section 8              | 2.8 GB   |    6 GB   |   2 min. | 
+
 ## Getting started
 
 To get started, first [obtain some side-channel traces](../traces/readme.md) to evaluate (either by downloading the pre-recoded traces or by collecting your own traces).
@@ -23,7 +34,9 @@ The first set of experiments evaluates the baseline performance of SpectrEM and 
 
 To reproduce these results, first download and extracts the traces in the directory `0-base-experiments/`. The script `reproduce/0-base-experiments.py` will evaluate all batches and print the bit error rates. The estimated runtime of this experiment is around 20 minutes.
 
-Expected output:
+<details>
+<summary>Expected output</summary>
+
 ```
 SpectrEM
  -> Control flow gadget
@@ -44,14 +57,17 @@ MeltEmdown
  --> Setup B: MLP: 0.006870% BER (36 errors in 524048 traces)
  ```
 
+</details>
+
  ### Additional experiments
 
  This set of experiments aims at reproducing Figure 5 (displaying the dependency on the number of training packets) and Figure 7 (showing the dependency on the number of `udiv` instructions for the instruction gadget).
 
-To reproduce these results, first download and extracts the traces in the directory `1-additional-experiments/`. The script `reproduce/1-additional-experiments.py` will evaluate all batches and print the bit error rates. The estimated runtime of this experiment is around 20 minutes.
+To reproduce these results, first download and extracts the traces in the directory `1-additional-experiments/`. The script `reproduce/1-additional-experiments.py` will evaluate all batches and print the bit error rates. The estimated runtime of this experiment is around 20 minutes. The script will output the raw BERs (see below) and will also generate two figures, saved to `figure5.png` and `figure7.png` (saved in the current working directory)
 
-Expected output:  
-The script will output the raw BERs (see below) and will also generate two figures, saved to `figure5.png` and `figure7.png` (saved in the current working directory)
+<details>
+<summary>Expected output</summary>
+
 ```
 Number of training packets
  -> Control flow gadget
@@ -145,13 +161,18 @@ Number of training packets
  ---> 72 udiv instructions: MLP: 0.003668% BER (3 errors in 81796 traces)
 ```
 
+</details>
+
+
 ### Reducing assumptions
 
 This set of experiments evaluates the influence of removing certain simplifications from the POCs, as described in Section 7.
 
 To reproduce these results, first download and extracts the traces in the directory `2-reducing-assumptions/`. The script `reproduce/2-reducing-assumptions.py` will evaluate all batches and print the bit error rates. The estimated runtime of this experiment is around 2 hours.
 
-Expected output:
+<details>
+<summary>Expected output</summary>
+
 ```
 Frequency scaling
  -> GMM: 5.557196% BER (25598 errors in 460628 traces)
@@ -166,13 +187,18 @@ Flushing
  -> MLP: 13.601243% BER (37565 errors in 276188 traces)
 ```
 
+</details>
+
+
 ### Case study
 
 The final set of experiments evaluates the performance of two vulnerable code patterns in OpenSSH. This case study is described in Section 8.
 
-To reproduce these results, first download and extracts the traces in the directory `3-case-study/`. The script `reproduce/3-case-study.py` will evaluate all batches and print the bit error rates. The estimated runtime of this experiment is around 5 minutes.
+To reproduce these results, first download and extracts the traces in the directory `3-case-study/`. The script `reproduce/3-case-study.py` will evaluate all batches and print the bit error rates. The estimated runtime of this experiment is around 2 minutes.
 
-Expected output:
+<details>
+<summary>Expected output</summary>
+
 ```
 SSH gadget
  -> GMM: 29.653716% BER (8846 errors in 29831 traces)
@@ -181,3 +207,5 @@ SFTP gadget
  -> GMM: 12.842439% BER (5677 errors in 44205 traces)
  -> MLP: 3.719107% BER (2495 errors in 67086 traces)
 ```
+
+</details>

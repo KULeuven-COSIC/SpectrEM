@@ -465,7 +465,7 @@ def evaluate_file_noflush(filename: str, mlp: str, get_bit, mlp_threshold: float
     return (error_gmm, total_gmm), (error_mlp, total_mlp)
 
 print("Evaluating experiments in Section 7 (reducing evaluation assumptions).")
-print("Estimated runtime: 2 hours")
+print("Estimated run time: 2 hours")
 
 results_gmm_dvfs, results_mlp_dvfs = evaluate_batch(
     f"{PRERECORDED_TRACES_DIR}/2-reducing-assumptions/0-frequency-scaling/", 

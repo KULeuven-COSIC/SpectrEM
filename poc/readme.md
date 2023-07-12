@@ -2,7 +2,11 @@
 
 This folder contains the proof-of-concept (POC) implementations of the
 SpectrEM and MeltEMdown attacks. 
-Note that these POCs are implemented specifically for the Raspberry Pi 4 model b.
+
+## Target device
+
+We performed our experiments on the Raspberry Pi 4 model B (2 GB, Rev 1.1). All POCs in this directory are implemented specifically for this device.
+All experiments were performed while running Ubuntu 20.04 LTS (64-bit) with kernel version 5.4.0-1088-raspi.
 
 ## Setting up the target
 

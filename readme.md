@@ -10,14 +10,26 @@ The scripts used to evaluate the recorded traces are located in `scripts/`. Thes
 
 The directory `traces/` contains more information about using either the pre-recorded traces or collecting your own traces. The scripts included in this repository will assume the traces are located within this directory.
 
-## Pre-Recorded Traces
+
+## Getting started
+
+### Pre-recorded traces
 
 We provide a [repository of pre-recorded traces](https://rdr.kuleuven.be/dataset.xhtml?persistentId=doi:10.48804/AHTI1A) to enable the reproduction of our results without requiring a similar EM side-channel setup as was used in the paper. These pre-recorded traces cover all experiments in Sections 6 through 8 as well as Appendix C.
 
 Instructions detailing how to download and use these traces can be found [here](./traces/readme.md).
 
+### Hardware requirements
 
-## Getting Started
+To run the Python scripts in this repository, we require the following system resources:
+
+* **Memory**  
+  To run all scripts, we recommend at least 16 GB of RAM.
+  The exact memory usage of each script can be found [here](./scripts/readme.md).
+* **Storage**  
+  To download and extract all traces, at least 520 GB of free space is required. Each dataset can, however, be downloaded seperately. The download size and uncompressed size for each dataset can be found [here](./traces/readme.md).
+
+### Setting up Python environment
 
 To get started, first create a new Python environment (python>=3.11) and install all dependencies. For instance, when using Anaconda:
 

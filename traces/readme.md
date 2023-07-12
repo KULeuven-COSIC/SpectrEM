@@ -26,13 +26,14 @@ $ tar xjvf 0-base-experiments.tar.bz2
 
 The extracted traces follow the structure as described in the table below. Each directory contains the traces for a specific set of experiments.
 
-Folder                    | Description                                         | Section                |
---------------------------|-----------------------------------------------------|------------------------|
-0-base-experiments/       | SpectrEM and MeltEMdown evaluation                  | Table 1 & Section 6.2  |
-1-additional-experiments/ | Number of training packets and `udiv` instructions  | Figure 5 & Figure 7    |
-2-reducing-assumptions/   | Reducing evaluation assumptions                     | Section 7              |
-3-case-study/             | OpenSSH case study                                  | Section 8              |
-4-mlp-data/               | Data for MLP training and evaluation                |                        |
+Folder                    | Description                                         | Section                | Download size | Extracted size |
+--------------------------|-----------------------------------------------------|------------------------|:-------------:|:--------------:|
+0-base-experiments/       | SpectrEM and MeltEMdown evaluation                  | Table 1 & Section 6.2  | 33 GB         |  59 GB         |
+1-additional-experiments/ | Number of training packets and `udiv` instructions  | Figure 5 & Figure 7    | 39 GB         |  71 GB         |
+2-reducing-assumptions/   | Reducing evaluation assumptions                     | Section 7              | 21 GB         |  37 GB         |
+3-case-study/             | OpenSSH case study                                  | Section 8              |  2 GB         |   4 GB         |
+4-mlp-data/               | Data for MLP training and evaluation                |                        | 89 GB         | 163 GB         |
+
 
 ### Reproducing results
 

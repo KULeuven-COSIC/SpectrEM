@@ -1,6 +1,6 @@
 from utils import evaluate_batch, print_results, get_bit_ssh, get_bit_sftp, PRERECORDED_TRACES_DIR
 
-print("Evaluating case study traces. Estimated runtime: 5 minutes")
+print("Evaluating case study traces. Estimated run time: 2 minutes")
 
 results_gmm_ssh, results_mlp_ssh = evaluate_batch(
     f"{PRERECORDED_TRACES_DIR}/3-case-study/ssh-gadget/", 
