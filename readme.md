@@ -36,6 +36,8 @@ To get started, first create a new Python environment (python>=3.11) and install
 ```bash
 $ conda create -n spectrem "python>=3.11" ipython
 $ conda activate spectrem
+$ conda config --env --add channels conda-forge
+$ conda config --env --set channel_priority strict
 $ conda install --file ./requirements.txt
 $ pip install tensorflow
 ```

@@ -494,10 +494,10 @@ results_gmm_noflush, results_mlp_noflush = evaluate_batch(
     f"{PRERECORDED_TRACES_DIR}/2-reducing-assumptions/2-flushing", 
     f"{PRERECORDED_TRACES_DIR}/2-reducing-assumptions/pretrained-mlp-models/2-flushing/spectrem_cf_a_pretrained_model.hdf5", 
     get_bit_sp,
-    "Cache thrashing",
+    "Flushing",
     gmm_proba=True,
     eval_file=evaluate_file_noflush)
 
-print(f"Cache thrashing")
+print(f"Flushing")
 print_results(results_gmm_noflush, " -> GMM:")
 print_results(results_mlp_noflush, " -> MLP:")

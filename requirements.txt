@@ -6,3 +6,5 @@ numpy
 scipy
 h5py
 scikit-learn
+requests
+split-file-reader

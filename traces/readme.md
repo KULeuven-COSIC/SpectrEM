@@ -7,19 +7,18 @@ This document goes over how to obtain the pre-recorded traces, and details the r
 
 The pre-recorded traces can be downloaded from the following data repository: https://rdr.kuleuven.be/dataset.xhtml?persistentId=doi:10.48804/AHTI1A
 
-As this repository does not provide a way to download all traces at once, we provide a small Python script to download them automatically. Run the Python script and follow the instructions to select which directories to download.
+As this repository does not provide a way to download all traces at once, we provide a small Python script to download and extract them automatically. Run the Python script and follow the instructions to select which directories to download.
 
 ```bash
 $ conda activate spectrem
 $ python download-traces.py
 ```
 
-The traces are compressed and split into 5 GiB partitions. To extract the raw traces, first combine the different parts, and extract the raw traces from the tar archive.
+The traces are compressed and split into 5 GiB partitions. To extract the raw traces manually, combine the different parts and extract the raw traces from the tar archive.
 
 ```bash
 $ cd 0-base-experiments/
-$ cat 0-base-experiments.tar.bz2.part* > 0-base-experiments.tar.bz2
-$ tar xjvf 0-base-experiments.tar.bz2
+$ cat 0-base-experiments.tar.bz2.part* | tar xvfj -
 ```
 
 ### File structure
